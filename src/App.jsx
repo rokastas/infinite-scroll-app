@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
-const fetchPictures = async () => {
+const fetchPictures = async (page) => {
   const API_KEY = 'Wtjxn62N4fHxioQLTxrNoNEodlgEZtDmZGOfJRKKW1oMtzwyEN5Vu14T';
   const perPage = 9; // Limit to 9 pictures per page
 
   try {
-    const response = await fetch(`https://api.pexels.com/v1/curated?per_page=${perPage}`, {
+    const response = await fetch(`https://api.pexels.com/v1/curated?per_page=${perPage}&page=${page}`, {
       headers: {
         Authorization: API_KEY
       }
@@ -27,22 +27,28 @@ const fetchPictures = async () => {
 function App() {
   // State for the list of pictures
   const [pictures, setPictures] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1); // Initialize page to 1
 
   // Fetch more pictures from the API
   const fetchMorePictures = async () => {
-    const newPictures = await fetchPictures();
-    setPictures((prevPictures) => [...prevPictures, ...newPictures]);
+    setLoading(true);
+    setTimeout(async () => {
+      const newPictures = await fetchPictures(page);
+      setPictures((prevPictures) => [...prevPictures, ...newPictures]);
+      setPage((prevPage) => prevPage + 1); // Increment page after fetching new pictures
+      setLoading(false);
+    }, 1000); // Delay loading for 1 second
   };
-
-  // Add the event listener when the component mounts
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   // Handle the scroll event
   const handleScroll = () => {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+    const buffer = 100;
+
+    if (
+      window.innerHeight + window.scrollY + buffer >= document.body.offsetHeight &&
+      !loading
+    ) {
       fetchMorePictures();
     }
   };
@@ -52,11 +58,18 @@ function App() {
     fetchMorePictures();
   }, []);
 
+  // Add the event listener when the component mounts
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [loading]);
+
   return (
     <div className="picture-grid">
       {pictures.map((picture) => (
         <img key={picture.id} src={picture.src.medium} alt={picture.url} />
       ))}
+      {loading && <div>Loading...</div>}
     </div>
   );
 }
