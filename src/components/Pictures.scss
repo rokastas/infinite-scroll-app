@@ -26,9 +26,14 @@
 .picture-info {
   opacity: 0;
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   width: 100%;
   height: 100%;
-  padding: 10px;
+  padding: 30px;
   box-sizing: border-box;
   background-color: rgba(0, 0, 0, 0.316);
   border-radius: 5px;
