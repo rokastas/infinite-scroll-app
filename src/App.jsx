@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
+import { useState, useEffect } from 'react';
+import Pictures from './components/Pictures';
 
 const fetchPictures = async (page) => {
   const API_KEY = 'Wtjxn62N4fHxioQLTxrNoNEodlgEZtDmZGOfJRKKW1oMtzwyEN5Vu14T';
@@ -65,12 +65,10 @@ function App() {
   }, [loading]);
 
   return (
-    <div className="picture-grid">
-      {pictures.map((picture) => (
-        <img key={picture.id} src={picture.src.medium} alt={picture.url} />
-      ))}
+    <>
+      <Pictures pictures={pictures} />
       {loading && <div>Loading...</div>}
-    </div>
+    </>
   );
 }
 
