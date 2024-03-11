@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import Pictures from './components/Pictures';
+import './index.scss'
 
 const fetchPictures = async (page) => {
   const API_KEY = 'Wtjxn62N4fHxioQLTxrNoNEodlgEZtDmZGOfJRKKW1oMtzwyEN5Vu14T';
-  const perPage = 9; // Limit to 9 pictures per page
+  const perPage = 30; // Limit - number of pictures per page
 
   try {
     const response = await fetch(`https://api.pexels.com/v1/curated?per_page=${perPage}&page=${page}`, {
@@ -25,40 +26,46 @@ const fetchPictures = async (page) => {
 };
 
 function App() {
-  // State for the list of pictures
   const [pictures, setPictures] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(1); // Initialize page to 1
+  const [page, setPage] = useState(1);
+  const [fetching, setFetching] = useState(false); // New state variable to track fetching status
 
-  // Fetch more pictures from the API
   const fetchMorePictures = async () => {
+    if (fetching) return; // Prevent concurrent requests
+    setFetching(true);
     setLoading(true);
-    setTimeout(async () => {
+    try {
+      // console.log('happy')
       const newPictures = await fetchPictures(page);
-      setPictures((prevPictures) => [...prevPictures, ...newPictures]);
-      setPage((prevPage) => prevPage + 1); // Increment page after fetching new pictures
+      const uniqueNewPictures = newPictures.filter(newPicture => (
+        !pictures.some(picture => picture.id === newPicture.id)
+      ));
+      if (uniqueNewPictures.length > 0) {
+        setPictures(prevPictures => [...prevPictures, ...uniqueNewPictures]);
+        setPage(prevPage => prevPage + 1);
+      }
+    } catch (error) {
+      console.error('Error fetching more pictures:', error);
+    } finally {
       setLoading(false);
-    }, 1000); // Delay loading for 1 second
+      setFetching(false);
+    }
   };
 
-  // Handle the scroll event
   const handleScroll = () => {
-    const buffer = 100;
-
-    if (
-      window.innerHeight + window.scrollY + buffer >= document.body.offsetHeight &&
-      !loading
-    ) {
+    const buffer = 0.999;
+    const triggerPoint = document.body.offsetHeight * buffer;
+    if (window.innerHeight + window.scrollY >= triggerPoint && !loading) {
       fetchMorePictures();
+      console.log(`Fetching more pictures at page ${page}, total pictures: ${pictures.length}`);
     }
   };
 
   useEffect(() => {
-    // Initial fetch of pictures when the component mounts
     fetchMorePictures();
   }, []);
 
-  // Add the event listener when the component mounts
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);

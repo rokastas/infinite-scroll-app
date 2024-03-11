@@ -1,12 +1,32 @@
 #picture-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-gap: 30px;
   justify-content: center;
   align-items: center;
   margin: 30px;
-  padding: 0;
   list-style: none;
+  max-width: 80%;
+}
+
+/* For smartphones */
+@media only screen and (max-width: 767px) {
+  #picture-grid {
+    grid-template-columns: 340px;
+  }
+}
+
+/* For tablets */
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  #picture-grid {
+    grid-template-columns: repeat(2, 340px);
+  }
+}
+
+/* For wide screens */
+@media only screen and (min-width: 1024px) {
+  #picture-grid {
+    grid-template-columns: repeat(3, 340px);
+  }
 }
 
 .picture-container {
@@ -28,16 +48,39 @@
   position: absolute;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  // justify-content: center;
   align-items: center;
   text-align: center;
   width: 100%;
   height: 100%;
-  padding: 30px;
+  padding: 50px 30px 30px 30px;
   box-sizing: border-box;
   background-color: rgba(0, 0, 0, 0.316);
   border-radius: 5px;
   color: white;
+
+  p {
+    margin: 0;
+  }
+
+  .alt {
+    font-weight: 500;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+            line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  hr {
+    background-color: white;
+    width: 60px;
+    height: 1px;
+  }
+
+  .photographer {
+    font-style: italic;
+  }
 
   &:hover {
     opacity: 1;
