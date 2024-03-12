@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Pictures from './components/Pictures';
 import './index.scss'
-import happi from './assets/happi.jpg'
+// import happi from './assets/happi.jpg'
 
 const fetchPictures = async (page) => {
   const API_KEY = 'Wtjxn62N4fHxioQLTxrNoNEodlgEZtDmZGOfJRKKW1oMtzwyEN5Vu14T';
