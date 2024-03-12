@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import Button from './Button';
+import ButtonFavourite from './ButtonFavourite';
 import './Pictures.scss';
-import ProgressiveImage from './ProgressiveImage';
 
 export default function Pictures({ pictures }) {
   // State to track favorited pictures
@@ -44,15 +43,14 @@ export default function Pictures({ pictures }) {
   return (
     <div id='picture-grid'>
       {pictures.map((picture, index) => (
-        <div className="picture-container" key={`${picture.id}-${index}`}>
+        <div className="picture-container" key={picture.id}>
           <div className="picture-info">
             <p className="alt">{ hasAltText(picture) ? picture.alt : 'Untitled'}</p>
             <hr></hr>
             <p className="photographer">{picture.photographer}</p>
-            <Button onClick={() => addToFavorites(picture.id)} favorited={isFavorited(picture.id)} />
+            <ButtonFavourite onClick={() => addToFavorites(picture.id)} favorited={isFavorited(picture.id)} />
           </div>
-          <ProgressiveImage className='picture' tinySrc={picture.src.tiny} src={chooseImageSize(picture)} alt={ hasAltText(picture) ? picture.alt : `picture by ${picture.photographer}`} />
-          {/* <img className='picture' src={chooseImageSize(picture)} alt={ hasAltText(picture) ? picture.alt : `picture from ${picture.photographer}`} loading="lazy"/> */}
+          <img className='picture' src={chooseImageSize(picture)} alt={ hasAltText(picture) ? picture.alt : `picture from ${picture.photographer}`} loading="lazy"/>
         </div>
       ))}
     </div>

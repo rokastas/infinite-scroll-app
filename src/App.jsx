@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import Pictures from './components/Pictures';
 import './index.scss'
-// import happi from './assets/happi.jpg'
 
 const fetchPictures = async (page) => {
   const API_KEY = 'Wtjxn62N4fHxioQLTxrNoNEodlgEZtDmZGOfJRKKW1oMtzwyEN5Vu14T';
@@ -19,13 +18,10 @@ const fetchPictures = async (page) => {
     }
 
     const data = await response.json();
-    console.log(data.photos);
     return data.photos;
-    // const happiPic = {alt: 'happi', photographer: 'happi', src: {tiny: happi, large: happi, large2x: happi}, id: 1}
-    // return [happiPic, happiPic, happiPic, happiPic, happiPic, happiPic, happiPic, happiPic, happiPic];
   } catch (error) {
     console.error('Error fetching pictures:', error.message);
-    return [];
+    throw error; // Re-throw the error to propagate it
   }
 };
 
@@ -33,50 +29,46 @@ function App() {
   const [pictures, setPictures] = useState([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
-  const [fetching, setFetching] = useState(false); // New state variable to track fetching status
+  const [errorOccurred, setErrorOccurred] = useState(false); // State to track if an error occurred
+  const [isScreenLarge, setIsScreenLarge] = useState(false);
 
   const fetchMorePictures = async () => {
-    if (fetching) {
-      console.log('aborting fetch because another fetch is in progress');
-      return
-    } // Prevent concurrent requests
-    setFetching(true);
     setLoading(true);
     try {
-      const newPictures = await fetchPictures(page);
-      // const uniqueNewPictures = newPictures.filter(newPicture => (
-        //   !pictures.some(picture => picture.id === newPicture.id)
-        // ));
-        // if (uniqueNewPictures.length > 0) {
-          setPictures(prevPictures => [...prevPictures, ...newPictures]);
-          console.log(page);
-          setPage(prevPage => prevPage + 1);
-          // }
-        } catch (error) {
-          console.error('Error fetching more pictures:', error);
-        } finally {
-          setLoading(false);
-          setFetching(false);
-        }
-    };
-
-    useEffect(() => {
-      // Fetch data when component mounts
-      console.log(`page: ${page}`);
-      console.log(`pictures length: ${pictures.length}`);
-    }, [page]);
-
-    const handleScroll = () => {
-      const buffer = 0.8
-      const triggerPoint = document.body.offsetHeight * buffer;
-      if (window.innerHeight + window.scrollY >= triggerPoint && !loading) {
-        window.removeEventListener('scroll', handleScroll);
-        fetchMorePictures();
-        console.log(loading);
-        console.log(`Fetching more pictures at page ${page}, total pictures: ${pictures.length}`);
+      if (!errorOccurred) {
+        const newPictures = await fetchPictures(page);
+        // Filter out duplicates
+        const uniqueNewPictures = newPictures.filter(newPic => !pictures.some(pic => pic.id === newPic.id));
+        setPictures(prevPictures => [...prevPictures, ...uniqueNewPictures]);
+        setPage(prevPage => prevPage + 1);
+        setErrorOccurred(false); // Reset error state if fetch is successful
       }
-    };
+    } catch (error) {
+      console.error('Error fetching more pictures:', error);
+      setErrorOccurred(true); // Set error occurred flag
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
+    // Fetch data when component mounts
+    console.log(`page: ${page}`);
+    console.log(`pictures length: ${pictures.length}`);
+  }, [page, pictures.length]);
+
+  const handleScroll = () => {
+    const buffer = 0.999;
+    const triggerPoint = document.body.offsetHeight * buffer;
+    if (window.innerHeight + window.scrollY >= triggerPoint && !loading && !errorOccurred) { // Check if there is no error
+      window.removeEventListener('scroll', handleScroll);
+      fetchMorePictures();
+    // } else if (errorOccurred) {
+    //   setErrorOccurred(false); // Reset error occurred flag
+    }
+  };
+
+  // initial fetch
   useEffect(() => {
     fetchMorePictures();
   }, []);
@@ -84,12 +76,40 @@ function App() {
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [loading]);
+  }, [loading, errorOccurred]); // Add error occurred flag as a dependency
+
+  useEffect(() => {
+    // Effect to check screen size and scroll availability
+    const handleResize = () => {
+      const isLargeScreen = window.innerHeight >= document.body.scrollHeight;
+      setIsScreenLarge(isLargeScreen);
+    };
+
+    handleResize(); // Call once to set initial state
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const handleTryAgain = () => {
+    setErrorOccurred(false);
+    fetchMorePictures();
+  };
 
   return (
     <>
       <Pictures pictures={pictures} />
-      {loading && <div>Loading...</div>}
+      <div className="loading-field">
+        {loading && <p className="loading">Loading...</p>}
+        {errorOccurred &&
+          <>
+            <p>Error loading pictures. Please try again later.</p>
+            <button className="btn-try-again" onClick={handleTryAgain}>Try Again</button>
+          </>
+        }
+        {isScreenLarge && !loading && !errorOccurred &&
+          <button className="btn-try-again" onClick={handleTryAgain}>Load More</button>
+        }
+      </div>
     </>
   );
 }
