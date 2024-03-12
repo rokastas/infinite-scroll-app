@@ -21,6 +21,8 @@ const fetchPictures = async (page) => {
     const data = await response.json();
     console.log(data.photos);
     return data.photos;
+    // const happiPic = {alt: 'happi', photographer: 'happi', src: {tiny: happi, large: happi, large2x: happi}, id: 1}
+    // return [happiPic, happiPic, happiPic, happiPic, happiPic, happiPic, happiPic, happiPic, happiPic];
   } catch (error) {
     console.error('Error fetching pictures:', error.message);
     return [];
