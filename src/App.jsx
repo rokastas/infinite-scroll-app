@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Pictures from './components/Pictures';
 import './index.scss'
+import happi from './assets/happi.jpg'
 
 const fetchPictures = async (page) => {
   const API_KEY = 'Wtjxn62N4fHxioQLTxrNoNEodlgEZtDmZGOfJRKKW1oMtzwyEN5Vu14T';
@@ -18,7 +19,10 @@ const fetchPictures = async (page) => {
     }
 
     const data = await response.json();
+    console.log(data.photos);
     return data.photos;
+    // const happiPic = {alt: 'happi', photographer: 'happi', src: {tiny: happi, large: happi, large2x: happi}, id: 1}
+    // return [happiPic, happiPic, happiPic, happiPic, happiPic, happiPic, happiPic, happiPic, happiPic];
   } catch (error) {
     console.error('Error fetching pictures:', error.message);
     return [];
@@ -32,35 +36,46 @@ function App() {
   const [fetching, setFetching] = useState(false); // New state variable to track fetching status
 
   const fetchMorePictures = async () => {
-    if (fetching) return; // Prevent concurrent requests
+    if (fetching) {
+      console.log('aborting fetch because another fetch is in progress');
+      return
+    } // Prevent concurrent requests
     setFetching(true);
     setLoading(true);
     try {
-      // console.log('happy')
       const newPictures = await fetchPictures(page);
-      const uniqueNewPictures = newPictures.filter(newPicture => (
-        !pictures.some(picture => picture.id === newPicture.id)
-      ));
-      if (uniqueNewPictures.length > 0) {
-        setPictures(prevPictures => [...prevPictures, ...uniqueNewPictures]);
-        setPage(prevPage => prevPage + 1);
-      }
-    } catch (error) {
-      console.error('Error fetching more pictures:', error);
-    } finally {
-      setLoading(false);
-      setFetching(false);
-    }
-  };
+      // const uniqueNewPictures = newPictures.filter(newPicture => (
+        //   !pictures.some(picture => picture.id === newPicture.id)
+        // ));
+        // if (uniqueNewPictures.length > 0) {
+          setPictures(prevPictures => [...prevPictures, ...newPictures]);
+          console.log(page);
+          setPage(prevPage => prevPage + 1);
+          // }
+        } catch (error) {
+          console.error('Error fetching more pictures:', error);
+        } finally {
+          setLoading(false);
+          setFetching(false);
+        }
+    };
 
-  const handleScroll = () => {
-    const buffer = 0.999;
-    const triggerPoint = document.body.offsetHeight * buffer;
-    if (window.innerHeight + window.scrollY >= triggerPoint && !loading) {
-      fetchMorePictures();
-      console.log(`Fetching more pictures at page ${page}, total pictures: ${pictures.length}`);
-    }
-  };
+    useEffect(() => {
+      // Fetch data when component mounts
+      console.log(`page: ${page}`);
+      console.log(`pictures length: ${pictures.length}`);
+    }, [page]);
+
+    const handleScroll = () => {
+      const buffer = 0.8
+      const triggerPoint = document.body.offsetHeight * buffer;
+      if (window.innerHeight + window.scrollY >= triggerPoint && !loading) {
+        window.removeEventListener('scroll', handleScroll);
+        fetchMorePictures();
+        console.log(loading);
+        console.log(`Fetching more pictures at page ${page}, total pictures: ${pictures.length}`);
+      }
+    };
 
   useEffect(() => {
     fetchMorePictures();
