@@ -4,7 +4,6 @@ import ButtonFavorite from '../components/ButtonFavorite';
 import Pictures from '../components/Pictures';
 
 test('ButtonFavorite renders with "Favorite" text', () => {
-  // const { getByText } = render(<ButtonFavorite />);
   render(<ButtonFavorite />);
   const button = screen.getByText('Favorite');
   expect(button).toBeInTheDocument();
