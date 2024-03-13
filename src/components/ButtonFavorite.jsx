@@ -1,6 +1,7 @@
+import React from 'react';
 import './Buttons.scss';
 
-export default function ButtonFavourite({ onClick, favorited }) {
+export default function ButtonFavorite({ onClick, favorited }) {
   return (
     <button className={`btn-favourite ${favorited ? 'favorited' : ''}`} onClick={onClick}>
       {favorited ? 'Favorited' : 'Favorite'}

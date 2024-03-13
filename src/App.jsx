@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
 import Pictures from './components/Pictures';
 import './index.scss'
@@ -51,11 +52,11 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    // Fetch data when component mounts
-    console.log(`page: ${page}`);
-    console.log(`pictures length: ${pictures.length}`);
-  }, [page, pictures.length]);
+  // useEffect(() => {
+  //   // Fetch data when component mounts
+  //   console.log(`page: ${page}`);
+  //   console.log(`pictures length: ${pictures.length}`);
+  // }, [page, pictures.length]);
 
   const handleScroll = () => {
     const buffer = 0.999;
@@ -63,8 +64,6 @@ function App() {
     if (window.innerHeight + window.scrollY >= triggerPoint && !loading && !errorOccurred) { // Check if there is no error
       window.removeEventListener('scroll', handleScroll);
       fetchMorePictures(extraPictureCount);
-    // } else if (errorOccurred) {
-    //   setErrorOccurred(false); // Reset error occurred flag
     }
   };
 
