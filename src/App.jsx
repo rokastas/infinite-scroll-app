@@ -2,9 +2,8 @@ import { useState, useEffect } from 'react';
 import Pictures from './components/Pictures';
 import './index.scss'
 
-const fetchPictures = async (page) => {
+const fetchPictures = async (page, perPage) => {
   const API_KEY = 'Wtjxn62N4fHxioQLTxrNoNEodlgEZtDmZGOfJRKKW1oMtzwyEN5Vu14T';
-  const perPage = 30; // Limit - number of pictures per page
 
   try {
     const response = await fetch(`https://api.pexels.com/v1/curated?per_page=${perPage}&page=${page}`, {
@@ -30,13 +29,14 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [errorOccurred, setErrorOccurred] = useState(false); // State to track if an error occurred
-  const [isScreenLarge, setIsScreenLarge] = useState(false);
+  const initialPictureCount = 60;
+  const extraPictureCount = 30;
 
-  const fetchMorePictures = async () => {
+  const fetchMorePictures = async (perPage) => {
     setLoading(true);
     try {
       if (!errorOccurred) {
-        const newPictures = await fetchPictures(page);
+        const newPictures = await fetchPictures(page, perPage);
         // Filter out duplicates
         const uniqueNewPictures = newPictures.filter(newPic => !pictures.some(pic => pic.id === newPic.id));
         setPictures(prevPictures => [...prevPictures, ...uniqueNewPictures]);
@@ -62,7 +62,7 @@ function App() {
     const triggerPoint = document.body.offsetHeight * buffer;
     if (window.innerHeight + window.scrollY >= triggerPoint && !loading && !errorOccurred) { // Check if there is no error
       window.removeEventListener('scroll', handleScroll);
-      fetchMorePictures();
+      fetchMorePictures(extraPictureCount);
     // } else if (errorOccurred) {
     //   setErrorOccurred(false); // Reset error occurred flag
     }
@@ -70,7 +70,7 @@ function App() {
 
   // initial fetch
   useEffect(() => {
-    fetchMorePictures();
+    fetchMorePictures(initialPictureCount);
   }, []);
 
   useEffect(() => {
@@ -78,21 +78,9 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [loading, errorOccurred]); // Add error occurred flag as a dependency
 
-  useEffect(() => {
-    // Effect to check screen size and scroll availability
-    const handleResize = () => {
-      const isLargeScreen = window.innerHeight >= document.body.scrollHeight;
-      setIsScreenLarge(isLargeScreen);
-    };
-
-    handleResize(); // Call once to set initial state
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   const handleTryAgain = () => {
     setErrorOccurred(false);
-    fetchMorePictures();
+    fetchMorePictures(extraPictureCount);
   };
 
   return (
@@ -105,9 +93,6 @@ function App() {
             <p>Error loading pictures. Please try again later.</p>
             <button className="btn-try-again" onClick={handleTryAgain}>Try Again</button>
           </>
-        }
-        {isScreenLarge && !loading && !errorOccurred &&
-          <button className="btn-try-again" onClick={handleTryAgain}>Load More</button>
         }
       </div>
     </>
