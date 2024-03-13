@@ -1,5 +1,6 @@
+import React from 'react';
 import { useState } from 'react';
-import ButtonFavourite from './ButtonFavourite';
+import ButtonFavorite from './ButtonFavorite';
 import './Pictures.scss';
 
 export default function Pictures({ pictures }) {
@@ -42,13 +43,13 @@ export default function Pictures({ pictures }) {
 
   return (
     <div id='picture-grid'>
-      {pictures.map((picture, index) => (
+      {pictures.map((picture) => (
         <div className="picture-container" key={picture.id}>
           <div className="picture-info">
             <p className="alt">{ hasAltText(picture) ? picture.alt : 'Untitled'}</p>
             <hr></hr>
             <p className="photographer">{picture.photographer}</p>
-            <ButtonFavourite onClick={() => addToFavorites(picture.id)} favorited={isFavorited(picture.id)} />
+            <ButtonFavorite onClick={() => addToFavorites(picture.id)} favorited={isFavorited(picture.id)} />
           </div>
           <img className='picture' src={chooseImageSize(picture)} alt={ hasAltText(picture) ? picture.alt : `picture from ${picture.photographer}`} loading="lazy"/>
         </div>
