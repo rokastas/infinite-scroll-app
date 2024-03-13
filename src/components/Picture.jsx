@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ButtonFavorite from './ButtonFavorite';
 import { hasAltText, chooseImageSize } from '../utils/pictureUtils';
-import './Pictures.scss';
+import '../styles/Picture.scss';
 
 function Picture({ picture }) {
   const [favorited, setFavorited] = useState(false);
@@ -19,7 +19,7 @@ function Picture({ picture }) {
         <p className="photographer">{picture.photographer}</p>
         <ButtonFavorite onClick={toggleFavorite} favorited={favorited} />
       </div>
-      <img className='picture' src={chooseImageSize(picture)} alt={hasAltText(picture) ? picture.alt : `Picture from ${picture.photographer}`} loading="lazy" />
+      <img className='picture' role='img' src={chooseImageSize(picture)} alt={hasAltText(picture) ? picture.alt : `Picture from ${picture.photographer}`} loading="lazy" />
     </div>
   );
 }

@@ -1,5 +1,8 @@
 export function hasAltText(picture) {
-  return picture.alt.length > 0;
+  if (picture && picture.alt && picture.alt.length > 0) {
+    return true;
+  }
+  return false;
 }
 
 export function chooseImageSize(picture) {

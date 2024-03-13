@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Picture from './Picture';
 import { fetchPictures } from '../utils/api';
-import './Pictures.scss';
+import '../styles/PictureGrid.scss';
+import '../styles/Buttons.scss';
 
 function PictureGrid() {
   const [pictures, setPictures] = useState([]);
@@ -19,7 +20,16 @@ function PictureGrid() {
   const loadPictures = async (numPicsPerPage) => {
     setLoading(true);
     try {
+      // console.log('Error occured:', errorOccurred);
+
       const newPictures = await fetchPictures(page, numPicsPerPage);
+
+      // if (newPictures.length > 0) {
+      //   console.log('Page:', page, 'Pictures loaded:', pictures.length);
+      // } else {
+      //   console.log('No new pictures were fetched.');
+      // }
+
       const uniqueNewPictures = newPictures.filter(newPic => !pictures.some(pic => pic.id === newPic.id));
       setPictures(prevPictures => [...prevPictures, ...uniqueNewPictures]);
       setPage(prevPage => prevPage + 1);
@@ -35,6 +45,7 @@ function PictureGrid() {
   const handleScroll = () => {
     const buffer = 0.999;
     const triggerPoint = document.body.offsetHeight * buffer;
+    // const triggerPoint = document.body.scrollHeight - window.innerHeight;
     if (window.innerHeight + window.scrollY >= triggerPoint && !loading && !errorOccurred) {
       window.removeEventListener('scroll', handleScroll);
       loadPictures(numPicturesToLoad);
