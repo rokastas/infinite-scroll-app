@@ -28,7 +28,7 @@
 /* For smartphones */
 @media only screen and (max-width: 640px) {
   #picture-grid {
-    grid-template-columns: minmax(1fr, 300px);
+    grid-template-columns: minmax(50px, 300px);
   }
 }
 

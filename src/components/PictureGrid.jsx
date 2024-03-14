@@ -43,10 +43,7 @@ function PictureGrid() {
   };
 
   const handleScroll = () => {
-    const buffer = 0.999;
-    const triggerPoint = document.body.offsetHeight * buffer;
-    // const triggerPoint = document.body.scrollHeight - window.innerHeight;
-    if (window.innerHeight + window.scrollY >= triggerPoint && !loading && !errorOccurred) {
+    if (window.innerHeight + window.scrollY >= (document.body.offsetHeight - 500) && !loading && !errorOccurred) {
       window.removeEventListener('scroll', handleScroll);
       loadPictures(numPicturesToLoad);
     }
