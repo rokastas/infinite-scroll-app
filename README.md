@@ -50,4 +50,5 @@ Start the server
 ## Author
 
 Made with ❤️, 🍵 and 🥵 by [Rokas Stasiulis](https://github.com/rokastas)
+\
 [GitHub Repo](https://github.com/rokastas/infinite-scroll-app?tab=readme-ov-file#infinite-scroll-app)
