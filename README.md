@@ -80,7 +80,7 @@ infinite-scroll-app/
 
 ## Built with
 
-**Core stack:** React, Javascript, SCSS, Vite, Jest, Babel
+**Core stack:** React, Javascript, SCSS, Vite
 
 **Third party API:** [Pexels](https://www.pexels.com/api/documentation/#photos-curated)
 
