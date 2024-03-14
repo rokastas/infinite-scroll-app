@@ -8,4 +8,7 @@ module.exports = {
     '^.+\\.jsx?$': 'babel-jest',
   },
   extensionsToTreatAsEsm: ['.jsx'],
+  testEnvironmentOptions: {
+    nodeOptions: ['--experimental-vm-modules']
+  }
 };

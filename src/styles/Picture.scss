@@ -1,13 +1,38 @@
 .picture-container {
+  border-radius: 5px;
   position: relative;
   height: 200px;
+  overflow: hidden;
+}
+
+@keyframes pulseColor {
+  0% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.1;
+  }
+}
+
+.pulsating-background {
+  animation: pulseColor 1s infinite;
+  filter: saturate(4);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 
 .picture {
+  border-radius: 5px;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }

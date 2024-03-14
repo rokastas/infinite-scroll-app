@@ -1,4 +1,5 @@
 const API_KEY = import.meta.env.VITE_PEXELS_API_KEY;
+// const API_KEY = process.env.VITE_PEXELS_API_KEY;
 
 export async function fetchPictures(page, numPicsPerPage) {
   try {

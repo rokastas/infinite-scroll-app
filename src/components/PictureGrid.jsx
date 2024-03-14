@@ -20,16 +20,7 @@ function PictureGrid() {
   const loadPictures = async (numPicsPerPage) => {
     setLoading(true);
     try {
-      // console.log('Error occured:', errorOccurred);
-
       const newPictures = await fetchPictures(page, numPicsPerPage);
-
-      // if (newPictures.length > 0) {
-      //   console.log('Page:', page, 'Pictures loaded:', pictures.length);
-      // } else {
-      //   console.log('No new pictures were fetched.');
-      // }
-
       const uniqueNewPictures = newPictures.filter(newPic => !pictures.some(pic => pic.id === newPic.id));
       setPictures(prevPictures => [...prevPictures, ...uniqueNewPictures]);
       setPage(prevPage => prevPage + 1);
