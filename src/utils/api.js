@@ -1,4 +1,4 @@
-const API_KEY = 'Wtjxn62N4fHxioQLTxrNoNEodlgEZtDmZGOfJRKKW1oMtzwyEN5Vu14T';
+const API_KEY = import.meta.env.VITE_PEXELS_API_KEY;
 
 export async function fetchPictures(page, numPicsPerPage) {
   try {
