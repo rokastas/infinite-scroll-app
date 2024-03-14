@@ -2,6 +2,7 @@
 
 The Infinite Scroll App is a web application built using React.js that allows users to browse and view curated pictures from the Pexels API. It provides an intuitive interface for users to scroll through a collection of high-quality images, view details about each picture, and favorite their preferred ones.
 
+
 ![App Screenshot](src/assets/Screenshot.png)
 
 ## Run Locally
