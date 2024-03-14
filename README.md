@@ -86,11 +86,11 @@ infinite-scroll-app/
 
 ## Built with
 
+This project was bootstrapped with Vite.
+
 **Core stack:** React, Javascript, SCSS
 
 **Third party API:** [Pexels](https://www.pexels.com/api/documentation/#photos-curated)
-
-This project was bootstrapped with Vite.
 
 
 ## Author
