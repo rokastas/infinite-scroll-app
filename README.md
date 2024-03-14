@@ -26,6 +26,13 @@ Before you start the app, create a .env file at the app's root. This file must h
 VITE_PEXELS_API_KEY=
 ```
 
+Make sure you have nodejs and npm installed on your machine. To check their versions run
+
+```
+  node -v
+  npm -v
+```
+
 
 Install dependencies
 
