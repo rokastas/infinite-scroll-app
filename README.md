@@ -5,17 +5,18 @@ The Infinite Scroll App is a web application built using React.js that allows us
 
 ![App Screenshot](src/assets/Screenshot.png)
 
+
 ## Run Locally
 
 Clone the project
 
-```bash
+```
   git clone https://github.com/rokastas/infinite-scroll-app.git
 ```
 
 Go to the project directory
 
-```bash
+```
   cd infinite-scroll-app
 ```
 
@@ -28,13 +29,13 @@ VITE_PEXELS_API_KEY=
 
 Install dependencies
 
-```bash
+```
   npm install
 ```
 
 Start the server
 
-```bash
+```
   npm run dev
 ```
 
@@ -44,6 +45,9 @@ Start the server
 **Core stack:** React, Javascript, SCSS
 
 **Third party API:** [Pexels](https://www.pexels.com/api/documentation/#photos-curated)
+
+
 ## Author
 
 Made with ❤️, 🍵 and 🥵 by [Rokas Stasiulis](https://github.com/rokastas)
+[GitHub Repo](https://github.com/rokastas/infinite-scroll-app?tab=readme-ov-file#infinite-scroll-app)
