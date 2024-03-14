@@ -20,7 +20,7 @@ Go to the project directory
   cd infinite-scroll-app
 ```
 
-Before you start the app, create a .env file at the app's root. This file must have values for env variables
+Before you start the app, create a .env file at the app's root. This file must have the value for the env variable below
 
 ```
 VITE_PEXELS_API_KEY=
