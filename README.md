@@ -40,6 +40,12 @@ Install dependencies
   npm install
 ```
 
+Run tests
+
+```
+  npm test
+```
+
 Start the server
 
 ```
@@ -54,14 +60,14 @@ infinite-scroll-app/
   ├── src/                          # Source code
   │   ├── assets/
   │   ├── components/               # React components
-  │   │   ├── ButtonFavorite.jsx
-  │   │   ├── Picture.jsx
-  │   │   └── PictureGrid.jsx
+  │   │   ├── ButtonFavorite.jsx    # Button that allows favoriting pictures
+  │   │   ├── Picture.jsx           # Main picture component
+  │   │   └── PictureGrid.jsx       # Picture grid that handles loading and layout of all pictures
   │   ├── styles/                   # SCSS styles
   │   │   ├── Buttons.scss
   │   |   ├── Picture.scss
   │   │   └── PictureGrid.scss
-  │   ├── tests/                    # All tests to be run before running the app
+  │   ├── tests/                    # Tests
   │   │   ├── Api.test.jsx
   │   │   └── ...
   │   ├── utils/                    # Utility functions and modules

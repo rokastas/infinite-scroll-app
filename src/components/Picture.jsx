@@ -8,7 +8,6 @@ function Picture({ picture }) {
 
   const toggleFavorite = () => {
     setFavorited(!favorited);
-    // Additional logic to store favorited state in localStorage if needed
   };
 
   return (
