@@ -40,9 +40,40 @@ Start the server
 ```
 
 
+## Project Structure
+```
+infinite-scroll-app/
+  ├── node_modules/                 # Installed dependencies
+  ├── src/                          # Source code
+  │   ├── assets/
+  │   ├── components/               # React components
+  │   │   ├── ButtonFavorite.jsx
+  │   │   ├── Picture.jsx
+  │   │   └── PictureGrid.jsx
+  │   ├── styles/                   # SCSS styles
+  │   │   ├── Buttons.scss
+  │   |   ├── Picture.scss
+  │   │   └── PictureGrid.scss
+  │   ├── tests/                    # All tests to be run before running the app
+  │   │   ├── Api.test.jsx
+  │   │   └── ...
+  │   ├── utils/                    # Utility functions and modules
+  │   │   ├── api.js                # Module for API interactions
+  │   │   └── pictureUtils.js       # Utility functions for picture operations
+  |   ├── App.jsx
+  │   ├── index.scss
+  │   └── main.jsx
+  ├── index.html                    # HTML template
+  ├── package.json                  # Project dependencies and scripts
+  ├── README.md                     # Project documentation
+  └── ...
+
+```
+
+
 ## Built with
 
-**Core stack:** React, Javascript, SCSS
+**Core stack:** React, Javascript, SCSS, Vite, Jest, Babel
 
 **Third party API:** [Pexels](https://www.pexels.com/api/documentation/#photos-curated)
 
@@ -50,5 +81,3 @@ Start the server
 ## Author
 
 Made with ❤️, 🍵 and 🥵 by [Rokas Stasiulis](https://github.com/rokastas)
-\
-[GitHub Repo](https://github.com/rokastas/infinite-scroll-app?tab=readme-ov-file#infinite-scroll-app)
