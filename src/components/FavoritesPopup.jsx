@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import FavoritePicture from './FavoritePicture';
 import ButtonFavoritesPopup from './ButtonFavoritesPopup';
-import ButtonPreviousPicture from './ButtonPreviousPicture';
-import ButtonNextPicture from './ButtonNextPicture';
 
 function FavoritesPopup({ favoritePictures }) {
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
@@ -71,11 +69,18 @@ function FavoritesPopup({ favoritePictures }) {
     <>
       <div className="overlay"></div>
       <div className="favorites-container">
-        <FavoritePicture key={picture.id} picture={picture} counter={counter} favoritePictures={favoritePictures}/>
+        {favoritePictures.length === 0 && <div>No favorite pictures yet</div>}
+        {favoritePictures.length > 0 &&
+          <FavoritePicture
+            key={picture.id}
+            picture={picture}
+            counter={counter}
+            favoritePictures={favoritePictures}
+            handlePrevious={handlePrevious}
+            handleNext={handleNext} />
+        }
       </div>
       <ButtonFavoritesPopup onClick={toggleFavoritesPopup} isPopUpOpen={isPopUpOpen} />
-      <ButtonPreviousPicture onClick={handlePrevious} />
-      <ButtonNextPicture onClick={handleNext} />
     </>
   );
 }

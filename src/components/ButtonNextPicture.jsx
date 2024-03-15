@@ -4,8 +4,8 @@ import Arrow from '../assets/arrow.png';
 function ButtonNextPicture({onClick}) {
 
   return (
-    <button onClick={onClick}>
-      <img src={Arrow} className='btn-next-picture' alt="Next" />
+    <button className='btn-next-picture' onClick={onClick}>
+      <img src={Arrow} className='btn-next-picture-icon' alt="Next" />
     </button>
   );
 }
