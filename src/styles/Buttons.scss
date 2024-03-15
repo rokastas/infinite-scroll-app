@@ -23,6 +23,25 @@
   }
 }
 
+.btn-favourite-popup {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  height: 36px;
+  min-width: 36px;
+  background-color: white;
+  color: black;
+  border-radius: 18px;
+  border: 10px solid rgba(151, 162, 164, 0.25);
+  border-color: black;
+  border-width: 1px;
+  z-index: 2;
+
+  &:active {
+    transform: rotate(90deg);
+  }
+}
+
 .btn-try-again {
   min-height: 36px;
   width: 100px;

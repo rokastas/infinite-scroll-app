@@ -13,3 +13,7 @@ export function chooseImageSize(picture) {
 export function isFavorited(favorites, id) {
   return favorites.includes(id);
 }
+
+export function favoritePictures(pictures, favorites) {
+  return pictures.filter(picture => favorites.includes(picture.id));
+}

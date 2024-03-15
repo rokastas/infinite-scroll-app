@@ -3,11 +3,9 @@ import ButtonFavorite from './ButtonFavorite';
 import { hasAltText, chooseImageSize } from '../utils/pictureUtils';
 import '../styles/Picture.scss';
 
-function Picture({ picture }) {
-  const [favorited, setFavorited] = useState(false);
-
+function Picture({ picture, onToggleFavorite, favorited }) {
   const toggleFavorite = () => {
-    setFavorited(!favorited);
+    onToggleFavorite(picture.id);
   };
 
   return (

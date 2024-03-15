@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import Picture from './Picture';
+import FavoritesPopup from './FavoritesPopup';
 import { fetchPictures } from '../utils/api';
 import '../styles/PictureGrid.scss';
 import '../styles/Buttons.scss';
+import { favoritePictures } from '../utils/pictureUtils';
 
 function PictureGrid() {
   const [pictures, setPictures] = useState([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [errorOccurred, setErrorOccurred] = useState(false);
+  const [favoritedPictures, setFavoritedPictures] = useState([]);
   const numInitialPictures = 60;
   const numPicturesToLoad = 30;
 
@@ -50,11 +53,32 @@ function PictureGrid() {
     loadPictures(numPicturesToLoad);
   };
 
+  // Function to toggle favorite
+  const toggleFavorite = (pictureId) => {
+    // Toggle favorited state for the picture
+    const updatedFavorites = favoritedPictures.includes(pictureId)
+      ? favoritedPictures.filter(id => id !== pictureId)
+      : [...favoritedPictures, pictureId];
+
+    // Update state
+    setFavoritedPictures(updatedFavorites);
+
+    // Save favoritedPictures to localStorage
+    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+  };
+
+  // Effect to load favorited pictures from localStorage on component mount
+  useEffect(() => {
+    const favoritesFromStorage = JSON.parse(localStorage.getItem('favorites')) || [];
+    setFavoritedPictures(favoritesFromStorage);
+  }, []);
+
   return (
     <>
+      <FavoritesPopup favoritePictures={favoritePictures(pictures, favoritedPictures)}/>
       <div id='picture-grid'>
         {pictures.map((picture) => (
-          <Picture key={picture.id} picture={picture} />
+          <Picture key={picture.id} picture={picture} onToggleFavorite={toggleFavorite} favorited={favoritedPictures.includes(picture.id)} />
         ))}
       </div>
       <div className="loading-field">
