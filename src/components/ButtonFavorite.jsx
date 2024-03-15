@@ -1,5 +1,4 @@
 import React from 'react';
-import '../styles/Buttons.scss';
 
 function ButtonFavorite({ onClick, favorited }) {
   return (

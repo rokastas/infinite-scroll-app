@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Picture from './Picture';
 import FavoritesPopup from './FavoritesPopup';
 import { fetchPictures } from '../utils/api';
-import '../styles/PictureGrid.scss';
-import '../styles/Buttons.scss';
 import { favoritePictures } from '../utils/pictureUtils';
 
 function PictureGrid() {

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import ButtonFavorite from './ButtonFavorite';
 import { hasAltText, chooseImageSize } from '../utils/pictureUtils';
-import '../styles/Picture.scss';
 
 function Picture({ picture, onToggleFavorite, favorited }) {
   const toggleFavorite = () => {

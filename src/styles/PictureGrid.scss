@@ -4,7 +4,6 @@
   justify-content: center;
   align-items: center;
   margin: 30px;
-  // list-style: none;
   max-width: 80%;
 }
 
@@ -28,20 +27,20 @@
 /* For smartphones */
 @media only screen and (max-width: 640px) {
   #picture-grid {
-    grid-template-columns: minmax(50px, 300px);
+    grid-template-columns: minmax(50px, $picture-width);
   }
 }
 
 /* For tablets */
 @media only screen and (min-width: 641px) and (max-width: 970px) {
   #picture-grid {
-    grid-template-columns: repeat(2, 300px);
+    grid-template-columns: repeat(2, $picture-width);
   }
 }
 
 /* For wide screens */
 @media only screen and (min-width: 971px) {
   #picture-grid {
-    grid-template-columns: repeat(3, 300px);
+    grid-template-columns: repeat(3, $picture-width);
   }
 }
