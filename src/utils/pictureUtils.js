@@ -7,6 +7,7 @@ export function hasAltText(picture) {
   return false;
 }
 
+
 // Example of function to check if picture is favorited
 export function isFavorited(favorites, id) {
   return favorites.includes(id);
@@ -15,6 +16,7 @@ export function isFavorited(favorites, id) {
 export function favoritePictures(pictures, favorites) {
   return pictures.filter(picture => favorites.includes(picture.id));
 }
+
 
 // Function to get the responsive picture URL
 export function ResponsivePicture(picture, parentWidth) {
@@ -38,6 +40,7 @@ export function ResponsivePicture(picture, parentWidth) {
   return (pictureUrl);
 }
 
+
 // Function to manage favorite pictures
 export function useFavoritePictures () {
   const [favoritedPictures, setFavoritedPictures] = useState([]);
@@ -57,6 +60,4 @@ export function useFavoritePictures () {
   };
 
   return [favoritedPictures, toggleFavorite];
-};
-
-export default useFavoritePictures;
+}

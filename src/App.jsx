@@ -1,9 +1,12 @@
-import React from 'react';
 import PictureGrid from './components/PictureGrid';
+import FavoritesGallery from './components/FavoritesGallery';
 import './styles/_index.scss';
 
 export default function App() {
   return (
-    <PictureGrid />
+    <>
+      <PictureGrid />
+      {/* <FavoritesGallery favoritePictures={favoritePictures(pictures, favoritedPictures)}/> */}
+    </>
   );
 }

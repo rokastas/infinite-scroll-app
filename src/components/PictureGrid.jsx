@@ -27,6 +27,7 @@ function PictureGrid() {
         !pictures.some(pic => pic.id === newPic.id)
       );
 
+      // Filter out any duplicate pictures
       if (uniqueNewPictures.length === 0) {
         setErrorOccurred(true);
         return;
@@ -55,7 +56,7 @@ function PictureGrid() {
     }
   };
 
-  // Effect hook to load more pictures when scrolling and cleanup event listener
+  // Effect hook to load more pictures when scrolling
   useEffect(() => {
     loadPictures(numPicturesToLoad);
   }, []);

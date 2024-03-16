@@ -2,7 +2,7 @@ import React from 'react';
 import Heart from '../../assets/heart.png';
 import X from '../../assets/x.png';
 
-function ButtonFavoritesPopup({ onClick, isPopUpOpen }) {
+function ButtonFavoritesGallery({ onClick, isPopUpOpen }) {
   const iconSrc = isPopUpOpen ? X : Heart;
   const iconAlt = isPopUpOpen ? 'Exit' : 'Favorites';
   const iconClass = isPopUpOpen ? 'exit' : 'heart';
@@ -14,4 +14,4 @@ function ButtonFavoritesPopup({ onClick, isPopUpOpen }) {
   );
 }
 
-export default ButtonFavoritesPopup;
+export default ButtonFavoritesGallery;

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import FavoritePicture from './FavoritePicture';
-import ButtonFavoritesPopup from './buttons/ButtonFavoritesPopup';
+import ButtonFavoritesGallery from './buttons/ButtonFavoritesGallery';
 
-function FavoritesPopup({ favoritePictures }) {
+function FavoritesGallery({ favoritePictures }) {
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
   const [counter, setCounter] = useState(0);
 
-  const toggleFavoritesPopup = () => {
+  const toggleFavoritesGallery = () => {
     setIsPopUpOpen(!isPopUpOpen);
   };
 
@@ -59,7 +59,7 @@ function FavoritesPopup({ favoritePictures }) {
   }
 
   if (!isPopUpOpen) {
-    return <ButtonFavoritesPopup onClick={toggleFavoritesPopup} />;
+    return <ButtonFavoritesGallery onClick={toggleFavoritesGallery} />;
   }
 
   let picture = favoritePictures[counter];
@@ -79,9 +79,9 @@ function FavoritesPopup({ favoritePictures }) {
             handleNext={handleNext} />
         }
       </div>
-      <ButtonFavoritesPopup onClick={toggleFavoritesPopup} isPopUpOpen={isPopUpOpen} />
+      <ButtonFavoritesGallery onClick={toggleFavoritesGallery} isPopUpOpen={isPopUpOpen} />
     </>
   );
 }
 
-export default FavoritesPopup;
+export default FavoritesGallery;
