@@ -8,6 +8,7 @@ jest.mock('../utils/api', () => ({
   fetchPictures: jest.fn()
 }));
 
+// Mock the images
 jest.mock('../assets/arrow.png', () => 'mock-arrow.png');
 jest.mock('../assets/heart.png', () => 'mock-heart.png');
 jest.mock('../assets/X.png', () => 'mock-X.png');
@@ -17,6 +18,7 @@ window.scrollTo = jest.fn();
 
 describe('PictureGrid', () => {
   it('fetches more pictures when scrolled to the bottom of the page', async () => {
+    // Create an array of 30 mock pictures
     const mockPictures = Array.from({ length: 30 }, (_, index) => ({
       id: index,
       photographer: `Photographer ${index}`,

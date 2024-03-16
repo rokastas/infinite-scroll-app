@@ -1,3 +1,5 @@
+// This file contains the function to fetch pictures from the Pexels API
+
 const API_KEY = import.meta.env.VITE_PEXELS_API_KEY;
 let cache = {};
 
@@ -20,7 +22,10 @@ export async function fetchPictures(page, numPicsPerPage) {
       throw new Error('Failed to fetch pictures');
     }
 
+    // Parse the response
     const data = await response.json();
+
+    // Extract the photos from the response
     const photos = data.photos;
 
     // Store data in the cache

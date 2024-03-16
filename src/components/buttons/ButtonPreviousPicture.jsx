@@ -1,3 +1,5 @@
+// Button to navigate to the previous picture in the Favorites Gallery
+
 import React from 'react';
 import Arrow from '../../assets/arrow.png';
 

@@ -1,3 +1,5 @@
+// This file contains utility functions to manage pictures and favorites
+
 import React, { useState, useEffect } from 'react';
 
 export function hasAltText(picture) {
@@ -7,18 +9,12 @@ export function hasAltText(picture) {
   return false;
 }
 
-
-// Example of function to check if picture is favorited
-export function isFavorited(favorites, id) {
-  return favorites.includes(id);
-}
-
+// Function to get the favorite pictures from pictures
 export function favoritePictures(pictures, favorites) {
   return pictures.filter(picture => favorites.includes(picture.id));
 }
 
-
-// Function to get the responsive picture URL
+// Function to determine the picture size based on the parent component width
 export function ResponsivePicture(picture, parentWidth) {
   const [pictureUrl, setPictureUrl] = useState('');
 
@@ -40,16 +36,17 @@ export function ResponsivePicture(picture, parentWidth) {
   return (pictureUrl);
 }
 
-
 // Function to manage favorite pictures
 export function useFavoritePictures () {
   const [favoritedPictures, setFavoritedPictures] = useState([]);
 
+  // Load favorites from local storage
   useEffect(() => {
     const favoritesFromStorage = JSON.parse(localStorage.getItem('favorites')) || [];
     setFavoritedPictures(favoritesFromStorage);
   }, []);
 
+  // Function to toggle favorite status
   const toggleFavorite = (pictureId) => {
     const updatedFavorites = favoritedPictures.includes(pictureId)
       ? favoritedPictures.filter(id => id !== pictureId)

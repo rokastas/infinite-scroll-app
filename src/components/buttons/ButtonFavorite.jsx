@@ -1,3 +1,5 @@
+// Button to favorite a picture in the Picture Grid
+
 import React from 'react';
 
 function ButtonFavorite({ onClick, favorited }) {

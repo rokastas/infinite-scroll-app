@@ -1,3 +1,7 @@
+// Code to display a grid of pictures, load more pictures on scroll, and handle errors
+// Uses Picture and FavoritesGallery components
+// It is called by App component
+
 import React, { useState, useEffect } from 'react';
 import Picture from './Picture';
 import FavoritesGallery from './FavoritesGallery';
@@ -5,17 +9,15 @@ import { fetchPictures } from '../utils/api';
 import { favoritePictures, useFavoritePictures } from '../utils/pictureUtils';
 
 function PictureGrid() {
-  // State hooks for managing pictures, loading state, page number, error status and favorited pictures
-  const [pictures, setPictures] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(1);
-  const [errorOccurred, setErrorOccurred] = useState(false);
-  const [favoritedPictures, toggleFavorite] = useFavoritePictures();
+  const [pictures, setPictures] = useState([]); // State to store pictures
+  const [loading, setLoading] = useState(false); // State to track loading status
+  const [page, setPage] = useState(1); // State to track the current page number
+  const [errorOccurred, setErrorOccurred] = useState(false); // State to track error status
+  const [favoritedPictures, toggleFavorite] = useFavoritePictures(); // Custom hook to manage favorite pictures
 
-  // Number of pictures to load per page
-  const numPicturesToLoad = 30;
+  const numPicturesToLoad = 30; // Number of pictures to load per page
 
-  // Function to load pictures from the API
+  // Function to fetch and then load pictures from the API
   const loadPictures = async (numPicsPerPage) => {
     setLoading(true);
     try {
@@ -27,7 +29,7 @@ function PictureGrid() {
         !pictures.some(pic => pic.id === newPic.id)
       );
 
-      // Filter out any duplicate pictures
+      // Raise error if no new pictures are fetched
       if (uniqueNewPictures.length === 0) {
         setErrorOccurred(true);
         return;
@@ -56,12 +58,12 @@ function PictureGrid() {
     }
   };
 
-  // Effect hook to load more pictures when scrolling
+  // Effect hook to load more pictures when the component mounts
   useEffect(() => {
     loadPictures(numPicturesToLoad);
   }, []);
 
-  // Effect hook to handle the scroll event and cleanup event listener dependencies
+  // Effect hook to handle the scroll event
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -73,29 +75,39 @@ function PictureGrid() {
     loadPictures(numPicturesToLoad);
   };
 
-  // Render component with FavoritesGallery, Picture components, loading indicator, and error message
+  // Render component with Picture components, loading indicator,
+  // error message and FavoritesGallery
   return (
     <>
-      {/* Display FavoritesGallery component */}
-      <FavoritesGallery favoritePictures={favoritePictures(pictures, favoritedPictures)}/>
-
       {/* Display grid of pictures */}
       <div id='picture-grid'>
         {pictures.map((picture) => (
-          <Picture key={picture.id} picture={picture} onToggleFavorite={toggleFavorite} favorited={favoritedPictures.includes(picture.id)} />
+          <Picture
+            key={picture.id}
+            picture={picture}
+            onToggleFavorite={toggleFavorite}
+            favorited={favoritedPictures.includes(picture.id)}
+          />
         ))}
       </div>
 
-      {/* Display loading indicator and error message */}
+      {/* Display loading indicator or error message */}
       <div className="loading-field">
         {loading && <p className="loading">Loading...</p>}
         {errorOccurred &&
           <>
             <p>Error loading pictures. Please try again later.</p>
-            <button className="btn-try-again" onClick={handleTryAgain}>Try Again</button>
+            <button className="btn-try-again" onClick={handleTryAgain}>
+              Try Again
+            </button>
           </>
         }
       </div>
+
+      {/* Display FavoritesGallery */}
+      <FavoritesGallery
+        favoritePictures={favoritePictures(pictures, favoritedPictures)}
+      />
     </>
   );
 }

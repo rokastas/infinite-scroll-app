@@ -59,4 +59,29 @@
       color: #888;
     }
   }
+
+  .favorite-picture-loading {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 200px;
+    width: 200px;
+    border-radius: 100px;
+    z-index: -1;
+    animation: pulseCircle 1s infinite;
+  }
+
+  @keyframes pulseCircle {
+    0% {
+      opacity: 0.1;
+    }
+    50% {
+      opacity: 0.3;
+    }
+    100% {
+      opacity: 0.1;
+    }
+  }
+
 }
