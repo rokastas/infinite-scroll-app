@@ -8,6 +8,10 @@ jest.mock('../utils/api', () => ({
   fetchPictures: jest.fn()
 }));
 
+jest.mock('../assets/arrow.png', () => 'mock-arrow.png');
+jest.mock('../assets/heart.png', () => 'mock-heart.png');
+jest.mock('../assets/X.png', () => 'mock-X.png');
+
 // Mock scrollTo function
 window.scrollTo = jest.fn();
 
