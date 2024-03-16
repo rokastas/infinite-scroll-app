@@ -56,29 +56,36 @@ Start the server
 ## Project Structure
 ```
 infinite-scroll-app/
-  ├── node_modules/                 # Installed dependencies
-  ├── src/                          # Source code
+  ├── node_modules/                   # Installed dependencies
+  ├── src/                            # Source code
   │   ├── assets/
-  │   ├── components/               # React components
-  │   │   ├── ButtonFavorite.jsx    # Button that allows favoriting pictures
-  │   │   ├── Picture.jsx           # Main picture component
-  │   │   └── PictureGrid.jsx       # Picture grid that handles loading and layout of all pictures
-  │   ├── styles/                   # SCSS styles
-  │   │   ├── Buttons.scss
-  │   |   ├── Picture.scss
-  │   │   └── PictureGrid.scss
-  │   ├── tests/                    # Tests
-  │   │   ├── Api.test.jsx
-  │   │   └── ...
-  │   ├── utils/                    # Utility functions and modules
-  │   │   ├── api.js                # Module for API interactions
-  │   │   └── pictureUtils.js       # Utility functions for picture operations
-  |   ├── App.jsx
+  │   ├── components/                 # React components
+  │   │   ├── buttons/
+  │   │   │   ├── ButtonFavorite.jsx  # Button that allows favoriting pictures
+  │   │   │   └── ...
+  │   │   ├── FavoritePicture.jsx     # Favorited picture to be displayed in Favorites Gallery
+  │   │   ├── FavoritesGallery.jsx    # Gallery of Favorited pictures
+  │   │   ├── Picture.jsx             # Main picture component
+  │   │   └── PictureGrid.jsx         # Picture grid that handles loading and layout of all pictures
+  │   ├── styles/                     # SCSS styles
+  │   │   ├── components/
+  │   │   │   ├── Buttons.jsx         # Styling of all buttons
+  │   │   │   ├── Picture.jsx         # Styling for the picture in the Picture Grid
+  │   │   │   └── ...
+  │   │   ├── _index.scss             # Main styling file
+  │   │   └── Variables.scss          # Variables used in the project
+  │   ├── tests/                      # Tests
+  │   │   ├── ButtonFavorite.test.jsx # Test for the button with favoriting functionality
+  │   │   └── PictureGrid.test.jsx    # Test for the Picture Grid handling of Pictures
+  │   ├── utils/                      # Utility functions and modules
+  │   │   ├── api.js                  # Module for API interactions
+  │   │   └── pictureUtils.js         # Utility functions for picture operations
+  │   ├── App.jsx
   │   ├── index.scss
   │   └── main.jsx
-  ├── index.html                    # HTML template
-  ├── package.json                  # Project dependencies and scripts
-  ├── README.md                     # Project documentation
+  ├── index.html                      # HTML template
+  ├── package.json                    # Project dependencies and scripts
+  ├── README.md                       # Project documentation
   └── ...
 
 ```

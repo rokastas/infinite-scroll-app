@@ -1,6 +1,7 @@
 // Button to open/close the Favorites Gallery
 
 import React from 'react';
+
 import Heart from '../../assets/heart.png';
 import X from '../../assets/x.png';
 
