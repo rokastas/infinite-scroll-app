@@ -20,7 +20,7 @@ Go to the project directory
   cd infinite-scroll-app
 ```
 
-Before you start the app, create a .env file at the app's root. This file must have the value for the env variable below
+Before you start the app, create a .env file at the app's root. This file must have the value for the env variable below. Register at https://www.pexels.com/ to get your API key.
 
 ```
 VITE_PEXELS_API_KEY=
