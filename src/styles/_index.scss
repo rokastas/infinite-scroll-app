@@ -1,8 +1,8 @@
 @import 'Variables.scss';
-@import 'Buttons.scss';
-@import 'FavoritesPopup.scss';
-@import 'Picture.scss';
-@import 'PictureGrid.scss';
+@import 'components/Buttons.scss';
+@import 'components/FavoritesGallery.scss';
+@import 'components/Picture.scss';
+@import 'components/PictureGrid.scss';
 
 body {
   background-color: #e7e7e7;

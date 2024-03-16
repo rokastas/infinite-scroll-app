@@ -92,15 +92,14 @@ button {
   &:hover {
     background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.139));
   }
-}
 
-
-.btn-next-picture-icon {
-  opacity: 0.3;
-  width: 50px;
-  height: 50px;
-  z-index: 3;
-  position: relative;
+  .btn-next-picture-icon {
+    opacity: 0.3;
+    width: 50px;
+    height: 50px;
+    z-index: 3;
+    position: relative;
+  }
 }
 
 .mirrored {

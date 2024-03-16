@@ -1,6 +1,6 @@
 import React from 'react';
-import Heart from '../assets/heart.png';
-import X from '../assets/x.png';
+import Heart from '../../assets/heart.png';
+import X from '../../assets/x.png';
 
 function ButtonFavoritesPopup({ onClick, isPopUpOpen }) {
   const iconSrc = isPopUpOpen ? X : Heart;

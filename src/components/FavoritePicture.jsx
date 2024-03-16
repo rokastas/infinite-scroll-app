@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { hasAltText, ResponsivePicture } from '../utils/pictureUtils';
-import ButtonPreviousPicture from './ButtonPreviousPicture';
-import ButtonNextPicture from './ButtonNextPicture';
+import ButtonPreviousPicture from './buttons/ButtonPreviousPicture';
+import ButtonNextPicture from './buttons/ButtonNextPicture';
 
-function FavoritePicture({ picture, counter, favoritePictures, onToggleFavorite, favorited, handlePrevious, handleNext }) {
+function FavoritePicture({ picture, counter, favoritePictures, handlePrevious, handleNext }) {
   const parentWidth = window.innerWidth;
 
   return (

@@ -16,6 +16,7 @@ export function favoritePictures(pictures, favorites) {
   return pictures.filter(picture => favorites.includes(picture.id));
 }
 
+// Function to get the responsive picture URL
 export function ResponsivePicture(picture, parentWidth) {
   const [pictureUrl, setPictureUrl] = useState('');
 
@@ -36,3 +37,26 @@ export function ResponsivePicture(picture, parentWidth) {
 
   return (pictureUrl);
 }
+
+// Function to manage favorite pictures
+export function useFavoritePictures () {
+  const [favoritedPictures, setFavoritedPictures] = useState([]);
+
+  useEffect(() => {
+    const favoritesFromStorage = JSON.parse(localStorage.getItem('favorites')) || [];
+    setFavoritedPictures(favoritesFromStorage);
+  }, []);
+
+  const toggleFavorite = (pictureId) => {
+    const updatedFavorites = favoritedPictures.includes(pictureId)
+      ? favoritedPictures.filter(id => id !== pictureId)
+      : [...favoritedPictures, pictureId];
+
+    setFavoritedPictures(updatedFavorites);
+    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+  };
+
+  return [favoritedPictures, toggleFavorite];
+};
+
+export default useFavoritePictures;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
-import ButtonFavorite from '../components/ButtonFavorite';
+import ButtonFavorite from '../components/buttons/ButtonFavorite';
 import Picture from '../components/Picture';
 
 describe('ButtonFavorite', () => {
