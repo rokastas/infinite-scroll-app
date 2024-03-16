@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, act, fireEvent, waitFor } from '@testing-library/react';
+import { render, act, waitFor } from '@testing-library/react';
 import PictureGrid from '../components/PictureGrid';
 import { fetchPictures } from '../utils/api'; // Import the fetchPictures function
 

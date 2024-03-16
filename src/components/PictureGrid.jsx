@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Picture from './Picture';
 import FavoritesGallery from './FavoritesGallery';
 import { fetchPictures } from '../utils/api';
