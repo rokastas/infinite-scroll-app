@@ -1,6 +1,6 @@
 // This file contains utility functions to manage pictures and favorites
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 export function hasAltText(picture) {
   if (picture && picture.alt && picture.alt.length > 0) {
@@ -31,7 +31,7 @@ export function ResponsivePicture(picture, parentWidth) {
     }
 
     setPictureUrl(newImageUrl);
-  }, [pictureLarge, pictureLarge2x]);
+  }, [pictureLarge, pictureLarge2x, parentWidth]);
 
   return (pictureUrl);
 }

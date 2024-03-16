@@ -1,7 +1,10 @@
+// This test checks if the PictureGrid component fetches more pictures
+// when scrolled to the bottom of the page.
+
 import React from 'react';
 import { render, act, waitFor } from '@testing-library/react';
 import PictureGrid from '../components/PictureGrid';
-import { fetchPictures } from '../utils/api'; // Import the fetchPictures function
+import { fetchPictures } from '../utils/api';
 
 // Mock the fetchPictures function
 jest.mock('../utils/api', () => ({
@@ -30,20 +33,20 @@ describe('PictureGrid', () => {
     fetchPictures.mockResolvedValue(mockPictures);
 
     // Render the PictureGrid component
-    const { getByTestId, findAllByTestId } = render(<PictureGrid />);
+    const { findAllByTestId } = render(<PictureGrid />);
 
     // Scroll to the bottom of the page
     act(() => {
       window.scrollTo(0, document.body.scrollHeight);
     });
 
-    // Wait for pictures to be loaded
+    // Check if fetchPictures is called
     await waitFor(() => {
-      expect(fetchPictures).toHaveBeenCalledTimes(1); // Ensure fetchPictures is called
+      expect(fetchPictures).toHaveBeenCalledTimes(1);
     });
 
-    // Check that the new pictures are rendered
+    // Check that the 30 new pictures are rendered
     const morePictures = await findAllByTestId('picture');
-    expect(morePictures.length).toBe(30); // Assuming fetchPictures returns 30 pictures
+    expect(morePictures.length).toBe(30);
   });
 });
