@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import FavoritePicture from './FavoritePicture';
-import ButtonFavoritesPopup from './ButtonFavoritesPopup';
+import ButtonFavoritesPopup from './buttons/ButtonFavoritesPopup';
 
 function FavoritesPopup({ favoritePictures }) {
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
@@ -8,7 +8,6 @@ function FavoritesPopup({ favoritePictures }) {
 
   const toggleFavoritesPopup = () => {
     setIsPopUpOpen(!isPopUpOpen);
-    console.log('popUp:', isPopUpOpen);
   };
 
   const handleKeyDown = (event) => {

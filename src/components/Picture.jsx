@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import ButtonFavorite from './ButtonFavorite';
+import ButtonFavorite from './buttons/ButtonFavorite';
 import { hasAltText, ResponsivePicture } from '../utils/pictureUtils';
 
 function Picture({ picture, onToggleFavorite, favorited }) {
@@ -29,6 +29,7 @@ function Picture({ picture, onToggleFavorite, favorited }) {
         src={ResponsivePicture(picture, parentWidth)}
         alt={hasAltText(picture) ? picture.alt : `Picture from ${picture.photographer}`}
         loading="lazy" />
+      <div style={{ backgroundColor: picture.avg_color }} className="picture-container pulsating-background"></div>
     </div>
   );
 }

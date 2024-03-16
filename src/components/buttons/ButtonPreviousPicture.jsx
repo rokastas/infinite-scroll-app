@@ -1,10 +1,10 @@
 import React from 'react';
-import Arrow from '../assets/arrow.png';
+import Arrow from '../../assets/arrow.png';
 
 function ButtonNextPicture({onClick}) {
 
   return (
-    <button className='btn-next-picture' onClick={onClick}>
+    <button className='btn-next-picture mirrored' onClick={onClick}>
       <img src={Arrow} className='btn-next-picture-icon' alt="Next" />
     </button>
   );
