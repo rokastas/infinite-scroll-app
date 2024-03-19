@@ -13,6 +13,7 @@ export async function fetchPictures(page, numPicsPerPage) {
     }
 
     const response = await fetch(`https://api.pexels.com/v1/curated?per_page=${numPicsPerPage}&page=${page}`, {
+      mode: 'cors',
       headers: {
         Authorization: API_KEY
       }
